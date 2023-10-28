@@ -1,0 +1,19 @@
+{
+  "name": "benoit2",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "image-scraper": "^0.2.1"
+  },
+  "scripts": {
+        "dev": "bun run index.ts"
+  }
+}
