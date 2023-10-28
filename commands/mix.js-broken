@@ -1,0 +1,48 @@
+const ytdl = require('ytdl-core');
+const ytSearch = require('yt-search');
+ 
+module.exports = {
+    name: 'mix',
+    description: 'joue ton mix',
+    async execute(message, args) {
+        const voiceChannel = message.member.voice.channel;
+ 
+        if (!voiceChannel) return message.channel.send('GROS TAS!! TES PAS DANS UN SALON VOCAL');
+        const permissions = voiceChannel.permissionsFor(message.client.user);
+        if (!permissions.has('CONNECT')) return message.channel.send('Tas pas le droit');
+        if (!permissions.has('SPEAK')) return message.channel.send('Tas pas le droit');
+
+
+        const  connection = await voiceChannel.join();
+
+        var lien = ''
+
+        var chance = Math.floor(Math.random() * 6);
+        if (chance == 0){
+           lien =  'https://www.youtube.com/watch?v=GLi-UF9U-RI'
+        } else if(chance == 1){
+            lien = 'https://www.youtube.com/watch?v=6Fnhn_2U0DA'
+        } else if(chance == 2){
+            lien = 'https://www.youtube.com/watch?v=YN1dHqCr6vE'
+        } else if (chance == 3){
+            lien = 'https://www.youtube.com/watch?v=JA1CPXtru4I'
+        } else if (chance == 4){
+            lien = 'https://www.youtube.com/watch?v=ijs66n6lUDM'
+        } else if(chance == 5){
+            lien = 'https://www.youtube.com/watch?v=BqwE64FveGk'
+        } else lien = 'https://www.youtube.com/watch?v=3SyWTtJC-kc'
+
+
+        const stream  = ytdl(lien, {filter: 'audioonly'});
+
+        connection.play(stream, {seek: 0, volume: 1})
+        .on('finish', () =>{
+            message.channel.send('Ta chanson est finie');
+        });
+
+        await message.reply(`oki jte fais ça babe ;)`)
+
+        return
+
+    }
+}
